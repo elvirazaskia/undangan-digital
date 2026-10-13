@@ -2,7 +2,7 @@
 <html lang="id"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The Wedding Of</title>
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+<link href="https://googleapis.com" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head><body>
   <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
@@ -30,13 +30,26 @@
   <a href="#galeri">🖼️</a><a href="#ucapan">💌</a><button id="musik">🎵</button>
 </nav>
 <div id="lightbox"><img alt=""></div>
-<audio id="audio" loop></audio>
-<script src="config.js"></script>
-<script src="script.js"></script>
-</body></html>
-<!-- Sesuaikan src langsung ke nama file musiknya -->
-<audio id="audioUndangan" loop>
+
+<!-- File musik Anda dimasukkan ke sini menggunakan ID bawaan template -->
+<audio id="audio" loop>
     <source src="mixkit-wo-ai-ni-979.mp3" type="audio/mp3">
     Browser Anda tidak mendukung elemen audio.
 </audio>
 
+<script src="config.js"></script>
+<script src="script.js"></script>
+
+<!-- Script wajib untuk memicu musik agar aktif saat layar diklik pertama kali -->
+<script>
+document.addEventListener('click', function() {
+    var audio = document.getElementById("audio");
+    if (audio.paused) {
+        audio.play().catch(function(error) {
+            console.log("Pemutaran musik tertahan oleh browser:", error);
+        });
+    }
+}, { once: true });
+</script>
+
+</body></html>
