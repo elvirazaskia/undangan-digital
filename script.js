@@ -48,7 +48,7 @@ $("#ucapan").innerHTML = `<h2>Ucapan &amp; Doa</h2>
   <div class="stat"><div class="g"><b id="sH">0</b>Hadir</div><div class="r"><b id="sT">0</b>Tidak Hadir</div><div class="y"><b id="sB">0</b>Belum Pasti</div></div>
   <div class="form"><input id="fn" placeholder="Nama" maxlength="40"><textarea id="fp" placeholder="Ucapan & doa" maxlength="200"></textarea>
   <select id="fk"><option>Hadir</option><option>Tidak Hadir</option><option>Belum Pasti</option></select><button class="btn" id="kirim">Kirim</button></div>
-  <div id="list"></div>$("#penutup").innerHTML = `   <div class="frame">     <svg class="b b1" aria-hidden="true"><use href="#bunga"/></svg>     <svg class="b b2" aria-hidden="true"><use href="#bunga"/></svg>     <svg class="b b3" aria-hidden="true"><use href="#bunga"/></svg>     <svg class="b b4" aria-hidden="true"><use href="#bunga"/></svg>     <div class="small">Dengan penuh syukur</div>     <div class="script">Terima Kasih</div>     <p>${C.terimakasih || C.penutup}</p>     <div class="garis"></div>     <p class="serif">Kami yang berbahagia,</p>     <div class="script nama">${dep(C.wanita.nama)} &amp; ${dep(C.pria.nama)}</div>     <p class="kecil">Keluarga besar kedua mempelai</p>   </div>`;`;
+  <div id="list"></div>`;
 let U = []; try { U = JSON.parse(localStorage.getItem("ucapan") || "[]"); } catch (e) {}
 function renderU() {
   $("#list").innerHTML = U.map(u => `<div class="msg"><b>${esc(u.n)}</b> <i>${esc(u.k)}</i><p>${esc(u.p)}</p></div>`).join("");
@@ -62,13 +62,22 @@ $("#kirim").onclick = () => {
 };
 renderU();
 
+$("#penutup").innerHTML = `
+  <div class="frame">
+    <svg class="b b1" aria-hidden="true"><use href="#bunga"/></svg>
+    <svg class="b b2" aria-hidden="true"><use href="#bunga"/></svg>
+    <svg class="b b3" aria-hidden="true"><use href="#bunga"/></svg>
+    <svg class="b b4" aria-hidden="true"><use href="#bunga"/></svg>
+    <div class="small">Dengan penuh syukur</div>
+    <div class="script">Terima Kasih</div>
+    <p>${C.terimakasih || C.penutup}</p>
+    <div class="garis"></div>
+    <p class="serif">Kami yang berbahagia,</p>
+    <div class="script nama">${dep(C.wanita.nama)} &amp; ${dep(C.pria.nama)}</div>
+    <p class="kecil">Keluarga besar kedua mempelai</p>
+  </div>`;
+
 const au = $("#audio"); au.src = C.musik;
 const play = () => au.play().then(() => $("#musik").classList.add("on")).catch(() => {});
 $("#musik").onclick = () => au.paused ? play() : (au.pause(), $("#musik").classList.remove("on"));
 $("#buka").onclick = () => { play(); document.getElementById("mempelai").scrollIntoView({ behavior: "smooth" }); };
-const belumPasti = dataKomentar.filter(item => item.status.toLowerCase() === 'belum pasti').length;
-const hadir = dataKomentar.filter(item => item.status.toLowerCase() === 'hadir').length;
-const tidakHadir = dataKomentar.filter(item => item.status.toLowerCase() === 'tidak hadir').length;
-document.getElementById('count-belum-pasti').innerText = belumPasti;
-document.getElementById('count-hadir').innerText = hadir;
-document.getElementById('count-tidak-hadir').innerText = tidakHadir;
