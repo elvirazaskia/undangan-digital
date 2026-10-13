@@ -45,3 +45,7 @@ p{font-size:3cqw;line-height:1.6}
 #musik.on{background:var(--lav)}
 #lightbox{position:fixed;inset:0;background:#000d;display:none;align-items:center;justify-content:center;z-index:20}
 #lightbox.on{display:flex}#lightbox img{max-width:94%;max-height:90%;border-radius:10px}
+.footer, footer, section:last-of-type {
+    padding-bottom: 60px !important; 
+    margin-bottom: 20px;
+}
